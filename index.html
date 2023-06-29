@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      * {
+        font-family: sans-serif;
+        text-decoration: none;
+      }
+
+      body {
+        margin: 0
+      }
+
+      .center-screen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+      }
+
+      #container {
+        /* Horizontal Center */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box {
+        margin: 0 10px;
+        max-width: 200px;
+      }
+
+      /* If .box is hovered, show a gentle shadow */
+      .box:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      img {
+        max-width: 100%;
+      }
+    
+      .title {
+        font-size: 1.2em;
+        font-weight: bold;
+        color:rgb(68, 1, 74)
+      }
+
+      .subtitle {
+        font-size: 0.8em;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container" class="center-screen">
+      <div class="box">
+        <a href="https://benjamin.secker.nz">
+          <div class="inner">
+            <img src="benjamin.jpg" alt="Benjamin Secker" />
+          </div>
+          <p class="title">Benjamin Secker</p>
+          <p class="subtitle">Software Engineer</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="https://atheria.ch">
+          <div class="inner">
+            <img src="amelia.jpg" alt="Amelia Secker" />
+          </div>
+          <p class="title">Amelia Secker</p>
+          <p class="subtitle">Digital Artist</p>
+        </a>
+      </div>
+      <div class="box">
+        <a href="https://teresasecker.co.nz">
+          <div class="inner">
+            <img src="teresa.jpg" alt="Teresa Secker" />
+          </div>
+          <p class="title">Teresa Secker</p>
+          <p class="subtitle">Artist</p>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
