@@ -1,86 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
     <style>
       * {
-        font-family: sans-serif;
-        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
       }
 
       body {
-        margin: 0
+        display: flex;
+        font-family: system-ui, sans-serif;
       }
 
-      .center-screen {
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+         BENJAMIN'S SIDE - Clean, minimal, warm
+         ═══════════════════════════════════════════════════════════ */
+      .side-benjamin {
+        flex: 1;
+        background: #faf9f7;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
+        transition: flex 0.4s ease;
+      }
+
+      .side-benjamin:hover {
+        flex: 1.08;
+      }
+
+      .benjamin-content {
         text-align: center;
-        min-height: 100vh;
+        padding: 2rem;
       }
 
-      #container {
-        /* Horizontal Center */
+      .benjamin-photo {
+        width: 160px;
+        height: 160px;
+        border-radius: 6px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .side-benjamin:hover .benjamin-photo {
+        transform: translateY(-4px);
+      }
+
+      .benjamin-name {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-top: 1.25rem;
+      }
+
+      .benjamin-tag {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: #666;
+        margin-top: 0.4rem;
+        letter-spacing: 0.02em;
+      }
+
+      .benjamin-arrow {
+        margin-top: 1.5rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .side-benjamin:hover .benjamin-arrow {
+        opacity: 1;
+      }
+
+      .benjamin-arrow svg {
+        width: 20px;
+        height: 20px;
+        stroke: #999;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+         AMELIA'S SIDE - Dark, angsty, ocean, space, electric
+         ═══════════════════════════════════════════════════════════ */
+      .side-amelia {
+        flex: 1;
+        background: #0a0c14;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        position: relative;
+        overflow: hidden;
+        transition: flex 0.4s ease;
       }
 
-      .box {
-        margin: 0 10px;
-        max-width: 200px;
+      .side-amelia:hover {
+        flex: 1.08;
       }
 
-      /* If .box is hovered, show a gentle shadow */
-      .box:hover {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      /* Deep space/ocean gradient - static, no animation */
+      .side-amelia::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(ellipse at 30% 70%, rgba(20, 40, 80, 0.6) 0%, transparent 50%),
+          radial-gradient(ellipse at 70% 30%, rgba(15, 35, 70, 0.5) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 90%, rgba(10, 50, 90, 0.5) 0%, transparent 40%);
       }
 
-      img {
-        max-width: 100%;
-      }
-    
-      .title {
-        font-size: 1.2em;
-        font-weight: bold;
-        color:rgb(68, 1, 74)
+      /* Electric/plasma accent line */
+      .electric-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg,
+          transparent,
+          #1e3a5f 20%,
+          #4a7cb5 40%,
+          #8bb4e0 50%,
+          #4a7cb5 60%,
+          #1e3a5f 80%,
+          transparent
+        );
+        opacity: 0.8;
       }
 
-      .subtitle {
-        font-size: 0.8em;
-        color: #666;
+      .electric-line-bottom {
+        top: auto;
+        bottom: 0;
+      }
+
+      .amelia-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .amelia-photo {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid rgba(100, 150, 200, 0.4);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .side-amelia:hover .amelia-photo {
+        border-color: rgba(140, 180, 220, 0.7);
+        transform: scale(1.02);
+      }
+
+      .amelia-name {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #c8d8e8;
+        margin-top: 1.25rem;
+      }
+
+      .amelia-tag {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: #5a7a9a;
+        margin-top: 0.4rem;
+        letter-spacing: 0.02em;
+      }
+
+      .amelia-arrow {
+        margin-top: 1.5rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .side-amelia:hover .amelia-arrow {
+        opacity: 1;
+      }
+
+      .amelia-arrow svg {
+        width: 20px;
+        height: 20px;
+        stroke: #5a7a9a;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+         CENTER DIVIDER
+         ═══════════════════════════════════════════════════════════ */
+      .divider {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgba(100, 100, 100, 0.2) 20%,
+          rgba(80, 120, 160, 0.3) 50%,
+          rgba(100, 100, 100, 0.2) 80%,
+          transparent
+        );
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+         MOBILE RESPONSIVE
+         ═══════════════════════════════════════════════════════════ */
+      @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+        }
+
+        .side-benjamin,
+        .side-amelia {
+          min-height: 50vh;
+          flex: none;
+        }
+
+        .side-benjamin:hover,
+        .side-amelia:hover {
+          flex: none;
+        }
+
+        .divider {
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(
+            to right,
+            transparent,
+            rgba(100, 100, 100, 0.2) 20%,
+            rgba(80, 120, 160, 0.3) 50%,
+            rgba(100, 100, 100, 0.2) 80%,
+            transparent
+          );
+        }
+
+        .benjamin-name,
+        .amelia-name {
+          font-size: 1.2rem;
+        }
+
+        .benjamin-photo,
+        .amelia-photo {
+          width: 130px;
+          height: 130px;
+        }
+
+        .electric-line {
+          display: none;
+        }
       }
     </style>
   </head>
   <body>
-    <div id="container" class="center-screen">
-      <div class="box">
-        <a href="https://benjamin.secker.nz">
-          <div class="inner">
-            <img src="benjamin.jpg" alt="Benjamin Secker" />
-          </div>
-          <p class="title">Benjamin Secker</p>
-          <p class="subtitle">Maker of things</p>
-        </a>
+    <!-- Benjamin's Side -->
+    <a href="https://benjamin.secker.nz" class="side-benjamin">
+      <div class="benjamin-content">
+        <img src="benjamin.jpg" alt="Benjamin Secker" class="benjamin-photo">
+        <h2 class="benjamin-name">Benjamin Secker</h2>
+        <p class="benjamin-tag">Maker of things</p>
+        <div class="benjamin-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
       </div>
-      <div class="box">
-        <a href="https://www.violetscomplex.space/">
-          <div class="inner">
-            <img src="amelia-new.png" alt="Amelia Secker Greenaway" />
-          </div>
-          <p class="title">Amelia Secker Greenaway</p>
-          <p class="subtitle">Bringer of chaos</p>
-        </a>
+    </a>
+
+    <!-- Amelia's Side -->
+    <a href="https://www.violetscomplex.space/" class="side-amelia">
+      <div class="electric-line"></div>
+      <div class="electric-line electric-line-bottom"></div>
+      <div class="amelia-content">
+        <img src="amelia-new.png" alt="Amelia Secker Greenaway" class="amelia-photo">
+        <h2 class="amelia-name">Amelia Secker Greenaway</h2>
+        <p class="amelia-tag">Bringer of chaos</p>
+        <div class="amelia-arrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </div>
       </div>
-<!--       <div class="box">
-        <a href="https://teresasecker.co.nz">
-          <div class="inner">
-            <img src="teresa.jpg" alt="Teresa Secker" />
-          </div>
-          <p class="title">Teresa Secker</p>
-          <p class="subtitle">Artist</p>
-        </a> -->
-      </div>
-    </div>
+    </a>
+
+    <!-- Center Divider -->
+    <!-- <div class="divider"></div> -->
   </body>
 </html>
